@@ -1,22 +1,25 @@
 import React from "react";
 import Task from "./Task.js";
+import { Consumer } from "./Context";
 
 const TaskBoard = () => {
   return (
-    <div className="list-group">
-      <ul>
-        <Task id="1" name="Dishwasher" />
-
-        <Task id="2" name="Cooking" />
-        <Task id="3" name="Laundry" />
-        <Task id="4" name="Carbage & bottles" />
-        <input
-          type="submit"
-          value="Send"
-          className="btn btn-dark btn-block mt-4"
-        />
-      </ul>
-    </div>
+    <Consumer>
+      {value => {
+        const { taskList } = value;
+        return (
+          <div className="task-board">
+            {taskList.map(task => (
+              <Task key={task} name={task} />
+            ))}
+            <button type="button" className="button">
+              {" "}
+              Send
+            </button>
+          </div>
+        );
+      }}
+    </Consumer>
   );
 };
 

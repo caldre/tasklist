@@ -1,7 +1,12 @@
 import React from "react";
 
 const Header = () => {
-  return <h1 className="mt-5 mb-5">Who did what?</h1>;
+  return (
+    <div className="header">
+      <h1>Who did what?</h1>
+      <p>A simple app to record your house chores</p>
+    </div>
+  );
 };
 
 export default Header;

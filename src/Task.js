@@ -1,47 +1,49 @@
 import React, { useState } from "react";
+import { Consumer } from "./Context";
 
 const Task = props => {
   const [isPartyShown, setIsPartyShown] = useState(false);
-  const [occupantSelected, setOccupantSelected] = useState("");
+  const [occupantSelected, setOccupantSelected] = useState(null);
 
-  const occupants = ["Niina", "Jyrki"];
-
-  /*  const handleOccupantClick = occupant => {
-    setOccupantSelected(occupant);
+  // jotain tällaista pitäs puskee contextiin
+  /* const data = {
+    {props.name}: occupantSelected
   }; */
-
-  /* const taskInfo = {
-    duty: props.name,
-    occupant: occupantSelected,
-    date: new Date()
-  }; */
-
   return (
-    <div className="container">
-      <div className="row">
-        <div
-          onClick={() => setIsPartyShown(!isPartyShown)}
-          className="col-5 mt-4"
-          style={{ cursor: "pointer" }}
-          border-style="solid"
-        >
-          {props.name}
-          <span style={{ float: "right" }}>{occupantSelected}</span>
-          {isPartyShown
-            ? occupants.map(occupant => (
+    <Consumer>
+      {value => {
+        const { occupantList } = value;
+
+        return (
+          <div className="task" onClick={() => setIsPartyShown(!isPartyShown)}>
+            {props.name[0].toUpperCase()}
+            {props.name.slice(1)}
+            {isPartyShown ? (
+              occupantList.map(occupant => (
                 <span
+                  className="occupantlist"
                   key={occupant}
                   onClick={() => setOccupantSelected(occupant)}
-                  className="list-group-item"
-                  style={{ float: "right" }}
                 >
                   {occupant}
                 </span>
               ))
-            : null}
-        </div>
-      </div>
-    </div>
+            ) : (
+              <span
+                className="occupant"
+                style={
+                  occupantSelected
+                    ? { visibility: "shown" }
+                    : { visibility: "hidden" }
+                }
+              >
+                {occupantSelected}
+              </span>
+            )}
+          </div>
+        );
+      }}
+    </Consumer>
   );
 };
 
