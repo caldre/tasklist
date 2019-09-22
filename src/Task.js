@@ -19,6 +19,7 @@ const Task = props => {
           <div className="task" onClick={() => setIsPartyShown(!isPartyShown)}>
             {props.name[0].toUpperCase()}
             {props.name.slice(1)}
+
             {isPartyShown ? (
               occupantList.map(occupant => (
                 <span

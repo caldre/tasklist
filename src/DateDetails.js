@@ -3,37 +3,46 @@ import { Consumer } from "./Context";
 
 // Tämä ehkä tarkoitus myöhemmin integroida samaan näyttöön,
 // josta valitaan nykyisen päivän tehtävät, kuitenkin niin että niitä ei voi jälkeenpäin muuttaa
-
 const DateDetails = props => {
   return (
     <Consumer>
       {value => {
         const { tasksHistory } = value;
+        const arrayOfSelectedDate = tasksHistory.filter(
+          taskHistory => taskHistory.date === props.date
+        );
 
-        // Miten käsittelen allaolevaa selectedDate-arrayta?
-        const renderDate = tasksHistory
-          .filter(taskHistory => taskHistory.date === props.date)
-          .map(({ carbage, cooking, dishwasher, laundry, date }) => {
+        if (arrayOfSelectedDate.length > 0) {
+          const objectOfSelectedDate = arrayOfSelectedDate[0];
+
+          const keys = Object.keys(objectOfSelectedDate).slice(1);
+          const values = Object.values(objectOfSelectedDate).slice(1);
+
+          const renderThis = keys.map((key, i) => {
+            const keyValuePaired = values[i];
+
             return (
-              <div className="task">
-                <h2 className="date">{date}</h2>
-                <p>
-                  Date:<span>{date}</span>
-                </p>
-                <p>
-                  Cooking:<span>{cooking}</span>
-                </p>
-                <p>
-                  Laundry:<span>{laundry}</span>
-                </p>
-                <p>
-                  Carbage & Bottles:<span>{carbage}</span>
-                </p>
-              </div>
+              <p className="task" key={key}>
+                {key[0].toUpperCase()}
+                {key.slice(1)}
+                <span>{keyValuePaired}</span>
+              </p>
             );
           });
 
-        return renderDate;
+          return (
+            <div className="date-card">
+              <h2>{props.date}</h2>
+              {renderThis}
+            </div>
+          );
+        } else
+          return (
+            <div className="date-card">
+              <h2>{props.date}</h2>
+              <p>No data from this day.</p>
+            </div>
+          );
       }}
     </Consumer>
   );

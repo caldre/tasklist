@@ -18,7 +18,6 @@ const App = () => {
         <Calendar
           onChange={date => setState({ date: date.toLocaleDateString() })}
           maxDate={new Date()}
-          style={{ margin: "auto" }}
         />
         <DateDetails date={state.date} />
       </Provider>
