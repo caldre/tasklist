@@ -5,10 +5,11 @@ const Task = props => {
   const [isPartyShown, setIsPartyShown] = useState(false);
   const [occupantSelected, setOccupantSelected] = useState(null);
 
-  // jotain tällaista pitäs puskee contextiin
-  /* const data = {
-    {props.name}: occupantSelected
-  }; */
+  /* jotain tällaista pitäs puskee contextiin, ei oo vielä dispatchia
+      {payload = {
+        {props.name}: occupantSelected
+      }  
+    }; */
   return (
     <Consumer>
       {value => {

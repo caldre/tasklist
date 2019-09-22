@@ -13,7 +13,6 @@ const TaskBoard = () => {
               <Task key={task} name={task} />
             ))}
             <button type="button" className="button">
-              {" "}
               Send
             </button>
           </div>

@@ -8,6 +8,7 @@ import "./app.css";
 
 const App = () => {
   const [state, setState] = useState({ date: new Date().toLocaleDateString() });
+  // HOX! <DateDetails> voi poistua myöhemmin ja se integroidaan <TaskBoardiin>
 
   return (
     <div className="container">
