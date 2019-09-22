@@ -8,54 +8,30 @@ const DateDetails = props => {
     <Consumer>
       {value => {
         const { tasksHistory } = value;
-        const renderEmpty = (
-          <div className="date-card">
-            <h2>{props.date}</h2>
-            <p>No data from this day.</p>
-          </div>
-        );
+        const renderEmpty = <p>No data from this day.</p>;
         const renderDate = tasksHistory
           .filter(taskHistory => taskHistory.date === props.date)
           .map(selectedDate => {
-            return Object.entries(selectedDate).map(([key, value]) => (
-              <p className="task" key={key}>
-                {key.toUpperCase()}
-                {value.slice(1)}
-                <span>
-                  `${key} ${value}`
-                </span>
-              </p>
-            ));
+            return Object.entries(selectedDate)
+              .slice(1)
+              .map(([key, value]) => (
+                <p className="task" key={key}>
+                  {key.toUpperCase()}
+                  <span>{value}</span>
+                </p>
+              ));
           });
 
-        console.log("render date", renderDate);
-        // if (arrayOfSelectedDate.length > 0) {
-        //   const objectOfSelectedDate = arrayOfSelectedDate[0];
+        const renderDateContent = renderDate.length ? renderDate : renderEmpty;
 
-        //   const keys = Object.keys(objectOfSelectedDate).slice(1);
-        //   const values = Object.values(objectOfSelectedDate).slice(1);
+        const renderDateDetails = (
+          <div className="date-card">
+            <h2>{props.date}</h2>
+            {renderDateContent}
+          </div>
+        );
 
-        //   const renderThis = keys.map((key, i) => {
-        //     const keyValuePaired = values[i];
-
-        //     return (
-        //       <p className="task" key={key}>
-        //         {key[0].toUpperCase()}
-        //         {key.slice(1)}
-        //         <span>{keyValuePaired}</span>
-        //       </p>
-        //     );
-        //   });
-
-        //   return (
-        //     <div className="date-card">
-        //       <h2>{props.date}</h2>
-        //       {renderThis}
-        //     </div>
-        //   );
-        // }
-
-        return renderDate.length ? renderDate : renderEmpty;
+        return renderDateDetails;
       }}
     </Consumer>
   );
