@@ -1,3 +1,23 @@
+Task Manager v0.1
+
+Task Manager is an easy and customable tool to track daily tasks.
+Getting started is 3-step data inquiry, takes about a minute.
+
+- Login / Create a new Task Manager
+- Add name to your Task Manager
+- Add participants to tasks
+- Add tasks
+
+Behaviour:
+
+- App by default uses current date as program starts,
+  but can be used to view history
+- App asks participants for current days tasks information
+- App saves task history
+- As database grows you can view completed tasks in a visual graph
+
+-------------------------------------------------------------------
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
