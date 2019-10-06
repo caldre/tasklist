@@ -17,13 +17,12 @@ const Task = props => {
 
         return (
           <div className="task" onClick={() => setIsPartyShown(!isPartyShown)}>
-            {props.name[0].toUpperCase()}
-            {props.name.slice(1)}
+            <p>{props.name}</p>
 
             {isPartyShown ? (
               occupantList.map(occupant => (
                 <span
-                  className="occupantlist"
+                  className="occupant"
                   key={occupant}
                   onClick={() => setOccupantSelected(occupant)}
                 >

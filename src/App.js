@@ -16,6 +16,7 @@ const App = () => {
         <Header />
         <TaskBoard />
         <Calendar
+          className="calendar"
           onChange={date => setState({ date: date.toLocaleDateString() })}
           maxDate={new Date()}
         />
