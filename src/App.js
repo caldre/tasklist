@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import TaskBoard from "./TaskBoard";
 import DateDetails from "./DateDetails";
 import Calendar from "react-calendar";
 import { Provider } from "./Context";
@@ -14,13 +13,12 @@ const App = () => {
     <div className="container">
       <Provider>
         <Header />
-        <TaskBoard />
+        <DateDetails date={state.date} />
         <Calendar
           className="calendar"
           onChange={date => setState({ date: date.toLocaleDateString() })}
           maxDate={new Date()}
         />
-        <DateDetails date={state.date} />
       </Provider>
     </div>
   );

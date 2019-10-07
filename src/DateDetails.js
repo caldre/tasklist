@@ -1,4 +1,5 @@
 import React from "react";
+import TaskBoard from "./TaskBoard";
 import { Consumer } from "./Context";
 
 // Tämä ehkä tarkoitus myöhemmin integroida samaan näyttöön,
@@ -22,7 +23,12 @@ const DateDetails = props => {
               ));
           });
 
-        const renderNoData = <p>No data from this day.</p>;
+        const renderNoData =
+          props.date === new Date().toLocaleDateString() ? (
+            <TaskBoard />
+          ) : (
+            <p>No data from this day.</p>
+          );
 
         const renderDateContent = renderDate.length ? renderDate : renderNoData;
 

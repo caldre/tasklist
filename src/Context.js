@@ -10,21 +10,21 @@ let state = {
   currentDay: {},
   tasksHistory: [
     {
-      date: new Date("2019", "8", "22").toLocaleDateString(),
+      date: new Date("2019", "9", "6").toLocaleDateString(),
       dishwasher: "Jyrki",
       cooking: "Niina",
       laundry: "Jyrki",
       carbage: "Niina"
     },
     {
-      date: new Date("2019", "8", "21").toLocaleDateString(),
+      date: new Date("2019", "9", "5").toLocaleDateString(),
       dishwasher: "Niina",
       cooking: "Jyrki",
       laundry: "Niina",
       carbage: "Jyrki"
     },
     {
-      date: new Date("2019", "8", "20").toLocaleDateString(),
+      date: new Date("2019", "9", "4").toLocaleDateString(),
       dishwasher: "Jyrki",
       cooking: "Niina",
       laundry: "Jyrki",
