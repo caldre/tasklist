@@ -8,7 +8,8 @@ const DateDetails = props => {
   return (
     <Consumer>
       {value => {
-        const { tasksHistory } = value;
+        console.log(value.state.currentDay);
+        const { tasksHistory } = value.state;
 
         const renderDate = tasksHistory
           .filter(taskHistory => taskHistory.date === props.date)

@@ -1,32 +1,42 @@
-import React, { useState } from "react";
-import { Consumer } from "./Context";
+import React, { useState, useContext } from "react";
+import { Context, Consumer } from "./Context";
 
 const Task = props => {
   const [isPartyShown, setIsPartyShown] = useState(false);
   const [occupantSelected, setOccupantSelected] = useState(null);
+  const { dispatch } = useContext(Context);
 
   /* jotain tällaista pitäs puskee contextiin, ei oo vielä dispatchia
       {payload = {
         {props.name}: occupantSelected
       }  
     }; */
+
+  const sendToContext = (task, person) => {
+    dispatch({
+      type: "ADD_TASK",
+      payload: { [task]: person }
+    });
+  };
+
   return (
     <Consumer>
       {value => {
-        const { occupantList } = value;
+        const { personList } = value.state;
 
         return (
           <div className="task" onClick={() => setIsPartyShown(!isPartyShown)}>
             <p>{props.name}</p>
 
             {isPartyShown ? (
-              occupantList.map(occupant => (
+              personList.map(person => (
                 <span
                   className="occupant"
-                  key={occupant}
-                  onClick={() => setOccupantSelected(occupant)}
+                  key={person}
+                  //onClick={() => setOccupantSelected(occupant)}
+                  onClick={() => sendToContext(props.name, person)}
                 >
-                  {occupant}
+                  {person}
                 </span>
               ))
             ) : (

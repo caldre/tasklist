@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useReducer } from "react";
 
 const Context = React.createContext();
 
 // Tässä on referenssi datasta, myöhemmin tulee jostain muualta, ehkä paremmassa muodossa?
-
-let state = {
-  taskList: ["dishwasher", "cooking", "laundry", "carbage"],
-  occupantList: ["Niina", "Jyrki"],
-  currentDay: {},
+let taskState = {
+  taskList: [
+    "dishwasher",
+    "cooking",
+    "laundry",
+    "carbage",
+    "clean the kitchen"
+  ],
+  personList: ["Niina", "Jyrki"],
+  currentDay: [],
   tasksHistory: [
     {
       date: new Date("2019", "9", "6").toLocaleDateString(),
       dishwasher: "Jyrki",
       cooking: "Niina",
-      laundry: "Jyrki",
+
       carbage: "Niina"
     },
     {
       date: new Date("2019", "9", "5").toLocaleDateString(),
       dishwasher: "Niina",
-      cooking: "Jyrki",
+      vacuuming: "Jyrki",
       laundry: "Niina",
       carbage: "Jyrki"
     },
@@ -27,14 +32,26 @@ let state = {
       date: new Date("2019", "9", "4").toLocaleDateString(),
       dishwasher: "Jyrki",
       cooking: "Niina",
-      laundry: "Jyrki",
-      carbage: "Niina"
+      "Drive kid to daycare": "Niina",
+      laundry: "Jyrki"
     }
   ]
 };
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TASK":
+      // Tähän pitää korjata se ettei samaa tehtävää ole useampaa kappaletta
+      return { ...state, currentDay: [...state.currentDay, action.payload] };
+    default:
+      return state;
+  }
+};
+
 const Provider = props => {
-  return <Context.Provider value={state}>{props.children}</Context.Provider>;
+  const [state, dispatch] = useReducer(reducer, taskState);
+  const value = { state, dispatch };
+  return <Context.Provider value={value}>{props.children}</Context.Provider>;
 };
 
 /* MITÄ TOIMINTOJA:
@@ -46,4 +63,4 @@ const Provider = props => {
 
 const { Consumer } = Context;
 
-export { Provider, Consumer };
+export { Context, Provider, Consumer };
